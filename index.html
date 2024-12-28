@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -437,3 +438,444 @@
   </script>
 </body>
 </html>cd "/c:/Users/gustavo.silva/OneDrive - ARION SERVIÇOS DE TELECOMUNICAÇÕES/Documentos/HELLO.WORLD/public"
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chamados</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(120deg, #50c26f, #5eda7f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto; /* Permite rolagem vertical */
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .form-container, .list-container {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 48%;
+      transition: transform 0.3s;
+    }
+    .form-container:hover, .list-container:hover {
+      transform: scale(1.02);
+    }
+    h1, h2 {
+      color: #333;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .form-row, .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+      align-items: flex-start; /* Alinha verticalmente os itens */
+      position: relative;
+    }
+    .form-row label, .form-group label {
+      margin-bottom: 3px;
+      font-weight: bold;
+      color: #333;
+      font-size: 0.8rem;
+    }
+    .form-row select, .form-group input, .form-group textarea, .form-row input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      transition: border-color 0.3s;
+    }
+    .form-row select:focus, .form-group input:focus, .form-group textarea:focus, .form-row input[type="text"]:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    .form-group textarea {
+      resize: vertical;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+      align-self: flex-start;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    #chamadoDetalhes {
+      border: 1px solid #888;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      text-align: left;
+      opacity: 0; /* Inicialmente invisível */
+      transition: opacity 0.5s, transform 0.5s; /* Transição para o efeito de fade-in */
+      transform: translateY(20px); /* Inicialmente deslocado para baixo */
+    }
+    #chamadoDetalhes.show {
+      opacity: 1;
+      transform: translateY(0); /* Volta para a posição original */
+    }
+    #chamadoDetalhes p {
+      margin: 5px 0;
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+    #chamadoDetalhes p strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #333;
+    }
+    #copyButton {
+      background-color: #28a745;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+      margin-top: 10px;
+    }
+    #copyButton:hover {
+      background-color: #218838;
+    }
+    #copyButton:active {
+      transform: scale(0.95);
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li:hover {
+      transform: scale(1.02);
+    }
+    .delete-button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .delete-button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h1>Registrar Chamados</h1>
+      <form id="chamadoForm">
+        <div class="form-row">
+          <label for="categoria">Categoria:</label>
+          <select id="categoriaSelect" required>
+            <option value="[MICRO]">[MICRO]</option>
+            <option value="[Softw.]">[Softw.]</option>
+            <!-- Adicione mais opções conforme necessário -->
+          </select>
+        </div>
+        
+        <div class="form-row">
+          <label for="tipo">Tipo:</label>
+          <select id="tipo" required>
+            <option value="Solicitação">Solicitação</option>
+            <option value="Incidente">Incidente</option>
+            <!-- Adicione mais opções conforme necessário -->
+          </select>
+        </div>
+        
+        <div class="form-row">
+          <label for="localidade">Localidade:</label>
+          <input type="text" id="localidadeInput" placeholder="Digite ou selecione uma localidade">
+          <select id="localidadeSelect" required>
+            <option value="[OPEN SPACE]">[OPEN SPACE]</option>
+            <option value="[CLOSED OFFICE]">[CLOSED OFFICE]</option>
+            <!-- Adicione mais opções conforme necessário -->
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="chamado">Chamado:</label>
+          <input type="text" id="chamado">
+        </div>
+        
+        <div class="form-group">
+          <label for="atendente">Atendente:</label>
+          <input type="text" id="atendente">
+        </div>
+        
+        <div class="form-group">
+          <label for="solicitante">Solicitante:</label>
+          <input type="text" id="solicitante">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email">
+        </div>
+        
+        <div class="form-group">
+          <label for="ramal">Ramal:</label>
+          <input type="text" id="ramal">
+        </div>
+        
+        <div class="form-group">
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="sla">SLA:</label>
+          <input type="text" id="sla">
+        </div>
+        
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+
+    <div class="list-container">
+      <h2>Chamados Registrados</h2>
+      <ul id="chamadosList"></ul>
+
+      <div id="chamadoDetalhes">
+        <h2>Detalhes do Chamado</h2>
+        <p><strong id="detalhesCategoriaTipoLocalidade"></strong></p>
+        <p id="detalhesChamado"></p>
+        <p id="detalhesAtendente"></p>
+        <p id="detalhesSolicitante"></p>
+        <p id="detalhesEmail"></p>
+        <p id="detalhesRamal"></p>
+        <p id="detalhesDescricao"></p>
+        <p id="detalhesSla"></p>
+      </div>
+
+      <button id="copyButton">Copiar Chamado</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("chamadoForm");
+    const chamadosList = document.getElementById("chamadosList");
+    const categoriaSelect = document.getElementById("categoriaSelect");
+    const localidadeInput = document.getElementById("localidadeInput");
+    const localidadeSelect = document.getElementById("localidadeSelect");
+    const solicitanteInput = document.getElementById("solicitante");
+    const emailInput = document.getElementById("email");
+    const detalhesCategoriaTipoLocalidade = document.getElementById("detalhesCategoriaTipoLocalidade");
+    const detalhesChamado = document.getElementById("detalhesChamado");
+    const detalhesAtendente = document.getElementById("detalhesAtendente");
+    const detalhesSolicitante = document.getElementById("detalhesSolicitante");
+    const detalhesEmail = document.getElementById("detalhesEmail");
+    const detalhesRamal = document.getElementById("detalhesRamal");
+    const detalhesDescricao = document.getElementById("detalhesDescricao");
+    const detalhesSla = document.getElementById("detalhesSla");
+    const copyButton = document.getElementById("copyButton");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const categoria = categoriaSelect.value;
+      let localidade = localidadeInput.value.trim().toUpperCase();
+      if (!localidade) {
+        localidade = localidadeSelect.value;
+      } else {
+        localidade = `[${localidade}]`;
+        // Adiciona a nova localidade ao select e ao localStorage
+        const option = document.createElement("option");
+        option.value = localidade;
+        option.text = localidade;
+        localidadeSelect.appendChild(option);
+        saveLocalidadeToLocalStorage(localidade);
+      }
+
+      const tipo = document.getElementById("tipo").value;
+      const chamado = document.getElementById("chamado").value;
+      const atendente = document.getElementById("atendente").value;
+      const solicitante = solicitanteInput.value;
+      const email = emailInput.value;
+      const ramal = document.getElementById("ramal").value;
+      const descricao = document.getElementById("descricao").value;
+      const sla = document.getElementById("sla").value;
+
+      // Salvar a associação de solicitante e email no localStorage
+      saveSolicitanteEmail(solicitante, email);
+
+      // Exibir os detalhes abaixo do formulário com efeito de fade-in
+      detalhesCategoriaTipoLocalidade.innerText = `${categoria} ${tipo} ${localidade}`;
+      detalhesChamado.innerText = chamado ? `Chamado: ${chamado}` : '';
+      detalhesAtendente.innerText = atendente ? `Atendente: ${atendente}` : '';
+      detalhesSolicitante.innerText = solicitante ? `Solicitante: ${solicitante}` : '';
+      detalhesEmail.innerText = email ? `E-mail: ${email}` : '';
+      detalhesRamal.innerText = ramal ? `Ramal: ${ramal}` : '';
+      detalhesDescricao.innerText = descricao ? `Descrição: ${descricao}` : '';
+      detalhesSla.innerText = sla ? `SLA: ${sla}` : '';
+
+      // Aplica o efeito de fade-in
+      const chamadoDetalhes = document.getElementById("chamadoDetalhes");
+      chamadoDetalhes.classList.add("show");
+    });
+
+    emailInput.addEventListener("blur", function() {
+      const email = emailInput.value;
+      const solicitante = getSolicitanteByEmail(email);
+      if (solicitante) {
+        solicitanteInput.value = solicitante;
+      }
+    });
+
+    copyButton.addEventListener("click", function() {
+      const detalhes = `
+        *${detalhesCategoriaTipoLocalidade.innerText}*
+        ${detalhesChamado.innerText ? `Chamado: ${detalhesChamado.innerText.replace('Chamado: ', '')}` : ''}
+        ${detalhesAtendente.innerText ? `Atendente: ${detalhesAtendente.innerText.replace('Atendente: ', '')}` : ''}
+        ${detalhesSolicitante.innerText ? `Solicitante: ${detalhesSolicitante.innerText.replace('Solicitante: ', '')}` : ''}
+        ${detalhesEmail.innerText ? `E-mail: ${detalhesEmail.innerText.replace('E-mail: ', '')}` : ''}
+        ${detalhesRamal.innerText ? `Ramal: ${detalhesRamal.innerText.replace('Ramal: ', '')}` : ''}
+        ${detalhesDescricao.innerText ? `Descrição: ${detalhesDescricao.innerText.replace('Descrição: ', '')}` : ''}
+        ${detalhesSla.innerText ? `SLA: ${detalhesSla.innerText.replace('SLA: ', '')}` : ''}
+      `;
+      navigator.clipboard.writeText(detalhes.trim()).then(() => {
+        alert("Detalhes do chamado copiados para a área de transferência!");
+      });
+
+      // Aplica o efeito de clique
+      copyButton.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        copyButton.style.transform = "scale(1)";
+      }, 100);
+    });
+
+    function saveLocalidadeToLocalStorage(localidade) {
+      let localidades = JSON.parse(localStorage.getItem("localidades")) || [];
+      if (!localidades.includes(localidade)) {
+        localidades.push(localidade);
+        localStorage.setItem("localidades", JSON.stringify(localidades));
+        renderLocalidades();
+      }
+    }
+
+    function saveSolicitanteEmail(solicitante, email) {
+      let solicitantes = JSON.parse(localStorage.getItem("solicitantes")) || {};
+      solicitantes[email] = solicitante;
+      localStorage.setItem("solicitantes", JSON.stringify(solicitantes));
+    }
+
+    function getSolicitanteByEmail(email) {
+      let solicitantes = JSON.parse(localStorage.getItem("solicitantes")) || {};
+      return solicitantes[email] || '';
+    }
+
+    function loadCategoriasFromLocalStorage() {
+      let categorias = JSON.parse(localStorage.getItem("categorias")) || [];
+      categorias = categorias.filter(categoria => /^\[.*\]$/.test(categoria)); // Remove categorias sem colchetes
+      localStorage.setItem("categorias", JSON.stringify(categorias)); // Atualiza o localStorage
+      categorias.forEach(categoria => {
+        const option = document.createElement("option");
+        option.value = categoria;
+        option.text = categoria;
+        categoriaSelect.appendChild(option);
+      });
+    }
+
+    function loadLocalidadesFromLocalStorage() {
+      renderLocalidades();
+    }
+
+    function renderLocalidades() {
+      const localidades = JSON.parse(localStorage.getItem("localidades")) || [];
+      localidadeSelect.innerHTML = '';
+      localidades.forEach(localidade => {
+        const option = document.createElement("option");
+        option.value = localidade;
+        option.text = localidade;
+        localidadeSelect.appendChild(option);
+      });
+    }
+
+    function deleteCategoria(categoria) {
+      let categorias = JSON.parse(localStorage.getItem("categorias")) || [];
+      categorias = categorias.filter(item => item !== categoria);
+      localStorage.setItem("categorias", JSON.stringify(categorias));
+      renderCategorias();
+    }
+
+    function deleteLocalidade(localidade) {
+      let localidades = JSON.parse(localStorage.getItem("localidades")) || [];
+      localidades = localidades.filter(item => item !== localidade);
+      localStorage.setItem("localidades", JSON.stringify(localidades));
+      renderLocalidades();
+    }
+
+    function renderCategorias() {
+      const categorias = JSON.parse(localStorage.getItem("categorias")) || [];
+      categoriaSelect.innerHTML = '';
+      categorias.forEach(categoria => {
+        const option = document.createElement("option");
+        option.value = categoria;
+        option.text = categoria;
+        categoriaSelect.appendChild(option);
+      });
+    }
+
+    // Função para carregar chamados do localStorage
+    function carregarChamados() {
+      const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+      chamadosList.innerHTML = "";
+      chamados.forEach((chamado, index) => {
+        // ...existing code...
+      });
+    }
+
+    // Carregar categorias e localidades do localStorage ao carregar a página
+    loadCategoriasFromLocalStorage();
+    loadLocalidadesFromLocalStorage();
+
+    // ...existing code...
+  </script>
+</body>
+</html>cd "/c:/Users/gustavo.silva/OneDrive - ARION SERVIÇOS DE TELECOMUNICAÇÕES/Documentos/HELLO.WORLD/public"
+>>>>>>> adc5b05 (Save local changes before rebase)
